@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Nueva publicación    
+{% endblock titulo %}
+
+{% block encabezado %}
+Nueva publicación
+{% endblock encabezado %}
+
+
+{% block contenido %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>
+        {{form.titulo}}
+    </p>
+    <p> 
+        {{form.archivo}}
+    </p>
+    <input type="submit" class="btn btn-primary btn-lg" id="submit" name="submit" value="Enviar archivo a revisión">
+</form>
+{% endblock contenido %}
+    
+    

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+{{titulo}}
+{% endblock titulo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">  
+{% endblock css %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <h1>{{titulo}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h4>Datos personales</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h4>Permisos</h4>
+                {% for grupo in lista_grupos %}
+                    <div class="row">
+                        <div class="col-3">
+                            <h6>{{grupo.name}}</h6>
+                        </div>
+                        <div class="col">
+                            <label class="switch" >  
+                                {% if grupos_usuario %}
+                                    {% if grupo in grupos_usuario %}
+                                        <input type="checkbox" name='{{grupo.id}}' checked>
+                                    {% else %}
+                                        <input type="checkbox" name='{{grupo.id}}'>
+                                    {% endif %}
+                                {% else %}
+                                    <input type="checkbox" name='{{grupo.id}}'>
+                                {% endif %}
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                <button type="submit" class="btn btn-primary" id="id_guardar">Guardar</button>
+                <a class="btn btn-secondary" href="{% url 'usuarios:lista' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+{% endblock contenido %}

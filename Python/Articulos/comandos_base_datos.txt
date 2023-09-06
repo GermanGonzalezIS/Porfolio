@@ -1,0 +1,28 @@
+CREATE DATABASE inifap_gestion_articulos CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE USER 'inifapadmin'@'%' identified by 'uaz_sw_3718692938192814';
+
+GRANT ALL PRIVILEGES ON inifap_gestion_articulos.* TO 'inifapadmin'@'%';
+
+FLUSH PRIVILEGES;
+
+Migras a la base MariaDB
+
+python manage.py migrate
+
+Abres el Shell 
+
+python manage.py shell
+
+Ejecutas los siguientes comandos en el shell
+
+from django.contrib.contenttypes.models import ContentType
+ContentType.objects.all().delete()
+
+Sales del shell y ejecutas el siguiente comando
+
+python manage.py loaddata db.json
+
+Otorgar el siguiente permiso desde mysql antes de ejecutar las pruebas unitarias:
+
+GRANT ALL PRIVILEGES ON test_inifap_gestion_articulos.* TO 'inifapadmin'@'%';

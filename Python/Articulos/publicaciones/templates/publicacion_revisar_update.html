@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+Detalles de la revisión
+{% endblock titulo %}
+
+
+{% block encabezado %}
+<div class="container">
+    {% block mensajes %}    
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'success'
+                            })
+                        </script>
+                    {% elif message.tags == 'error' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'error'
+                            })
+                        </script>
+                    {% elif message.tags == 'info' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'info'
+                            })
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endblock mensajes %}
+        <div class="row align-items-center justify-content-between" id="id_encabezado">
+            <div class="col-md-8" id="titulo_mis_publicaciones">
+                Detalles de la revisión
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" href="{% url 'publicaciones:descargar_publicacion' revision.publicacion.id %}" id="id_descargar">Descargar publicación</a>            
+            </div>
+        </div>
+</div>
+
+
+{% endblock encabezado %}
+
+{% block contenido %}
+<br>
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="svg_wrap">
+                <section>
+                    <h4><b>Datos de la publicación</b></h4>
+                    <hr>
+                    <div class="col-6">
+                        <b id="id_titulo" >Título:</b> {{revision.publicacion.titulo}}
+                        <br>
+                        <b id="id_autor">Autor:</b> {{revision.publicacion.autor.nombre}} {{revision.publicacion.autor.primer_apellido}} {{revision.publicacion.autor.segundo_apellido}}
+                        <br>
+                        
+                        {% if revision.archivo.name == '' %}
+                            <b id="id_archivo">Última revisión publicada:</b> No hay revisiones aún               
+                        {% else %}
+                            <b id="id_archivo">Última revisión publicada:</b> {{ revision.archivo.name|slice:"11:" }}
+                        {% endif %}
+                            
+                        <br>
+                        <b id="id_subir_revision">Subir nueva revisión:</b> {{form.archivo}}
+                        <br>
+                        <b id="id_estado">Estado de la revisión:</b> {{form.estado}}
+                        <br>
+                        <br>
+                    </div>
+                </section>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="id_guardar">Guardar</button>
+            <a class="btn btn-secondary" href="{% url 'publicaciones:revisar_publicaciones' %}">Regresar</a>
+        </form>
+    </div>
+</div>
+{% endblock contenido %}
+    

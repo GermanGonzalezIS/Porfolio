@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Mis Publicaciones 
+{% endblock titulo %}
+
+{% block encabezado %}
+<div class="container">
+    {% block mensajes %}    
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'success'
+                            })
+                        </script>
+                    {% elif message.tags == 'error' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'error'
+                            })
+                        </script>
+                    {% elif message.tags == 'info' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'info'
+                            })
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endblock mensajes %}
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md-9" id="titulo_mis_publicaciones">
+            Mis Publicaciones
+        </div>
+        <div class="col-md-auto">
+            <a class="btn btn-primary btn-lg" id="nueva_publicacion" href="{% url 'publicaciones:nueva_publicacion' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                Nueva Publicación
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock encabezado %}
+
+
+{% block contenido %}
+<div class="card mb-4">
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Fecha de publicación</th>
+                    <th>Estatus</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for publicacion in object_list  %}
+                <tr>
+                    <td>{{publicacion.id}}</td>
+                    <td>{{publicacion.titulo}}</td>
+                    <td>{{publicacion.fecha_publicacion}}</td>
+                    <td>{{publicacion.estatus}}</td>
+                    <td>{{publicacion.autor}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock contenido %}
+    
+    

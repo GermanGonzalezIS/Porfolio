@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Detalle de Publicación
+{% endblock %}
+
+{% block encabezado %} 
+<div class="container">
+    {% block mensajes %}    
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'success'
+                            })
+                        </script>
+                    {% elif message.tags == 'error' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'error'
+                            })
+                        </script>
+                    {% elif message.tags == 'info' %}
+                        <script>
+                            Swal.fire({
+                                title:'{{message}}',
+                                icon:'info'
+                            })
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endblock mensajes %}
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md-5">
+            Detalle de Publicación
+        </div>
+        <div class="col-md-auto">
+            <a class="btn btn-secondary btn-lg" href="{% url 'gestion_publicaciones:lista_publicaciones' %}">Regresar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block contenido %}
+    <div id="svg_wrap">
+        <section> 
+            <h4><b>Datos de la Publicación</b></h4>
+            <hr>
+            <div class="col-6">
+            <p><b>Título: </b>{{publicacion.titulo}}</p>
+            <p><b>Autor: </b>{{publicacion.autor}}</p>
+            <p><b>Fecha de publicación: </b>{{publicacion.fecha_publicacion}}</p>
+            <p>
+                <b>Estatus: </b>
+                {% if estatus %}
+                    {{estatus}} revision(es)
+                {% else %}
+                    {{publicacion.estatus}}
+                {% endif %}
+            </p>
+        </section>
+    </div>
+    <br>
+    <div id="svg_wrap">
+        <section> 
+            <h4><b>Revisores de la Publicación</b></h4>
+            <hr>
+            <div class="col">
+            {% if revisiones %}
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Revisor</th>
+                            <th>Archivo de revisión</th>
+                            <th>Estado de la solicitud</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for revision in revisiones  %}
+                        <tr>
+                            <td>{{revision.id}}</td>
+                            <td>{{revision.usuario_revisor}}</td>
+                            <td>
+                                {% if revision.archivo %}
+                                    {{revision.archivo}}
+                                {% else %}
+                                    Sin entregar
+                                {% endif %}    
+                            </td>
+                            <td>{{revision.estado.descripcion}}</td>
+                            <td>
+                                {% if revision.estado.id == 2 %}
+                                    <a class="btn btn-success" href="{% url 'gestion_publicaciones:enviar_recordatorio' revision.id %}">
+                                        Envíar recordatorio
+                                    </a>
+                                {% elif revision.estado.id == 3 %}
+                                    <a class="btn btn-warning" href="{% url 'gestion_publicaciones:cambiar_revisor' revision.id %}">
+                                        Cambiar revisor
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p><b>Esta publicación no tiene revisores asignados. </b></p>
+                <a class="btn btn-primary" href="{% url 'gestion_publicaciones:asignar_revisores' publicacion.id %}">
+                    Asignar revisores ahora
+                </a>
+            {% endif %}
+            </div>
+        </section>
+    </div>
+    <br>
+    <br>
+{% endblock contenido %}
