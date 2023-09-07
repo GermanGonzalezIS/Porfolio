@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Etiqueta_lista">Subjects List</string>
+    <string name="Hint_Clave">Subject Key</string>
+    <string name="Hint_nombre">Subjects Name</string>
+    <string name="texto_boton_agregar">Add</string>
+    <string name="texto_boton_eliminar">Delete</string>
+    <string name="texto_boton_guardar">Save</string>
+    <string name="texto_boton_nueva">New</string>
+    <string name="texto_boton_regresar">Return List</string>
+    <string name="texto_confirmacion_eliminar">Are you sure that you want to delete this register?</string>
+    <string name="texto_error_datos">Missing mandatory data</string>
+    <string name="texto_error_es">Server Conection Error</string>
+    <string name="texto_error_formato">Invalid Format Data</string>
+    <string name="texto_error_operacion">The requested operation could not be performed</string>
+    <string name="texto_error_url">Invalid URL</string>
+    <string name="texto_exito">The request operation was successful</string>
+    <string name="hint_semestre_materia">Semester</string>
+    <string name="titulo_confirmacion_eliminar">Delete Confirmation</string>
+    <string name="titulo_opcion_no">No</string>
+    <string name="titulo_opcion_si">Yes</string>
+</resources>

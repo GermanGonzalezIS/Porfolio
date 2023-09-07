@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Etiqueta_lista">Themenliste</string>
+    <string name="Hint_Clave">Materie Schlüssel</string>
+    <string name="Hint_nombre">Name der Materie</string>
+    <string name="hint_semestre_materia">Semester</string>
+    <string name="texto_boton_agregar">Hinzufügen</string>
+    <string name="texto_boton_eliminar">Entfernen</string>
+    <string name="texto_boton_guardar">"  Speichern"</string>
+    <string name="texto_boton_nueva">Neu</string>
+    <string name="texto_boton_regresar">Rücknahmeliste</string>
+    <string name="texto_confirmacion_eliminar">Möchten Sie diesen Datensatz wirklich löschen?</string>
+    <string name="texto_error_datos">Fehlende erforderliche Daten</string>
+    <string name="texto_error_es">Server Verbindungsfehler</string>
+    <string name="texto_error_formato">Daten falsch</string>
+    <string name="texto_error_operacion">Die Operation konnte nicht ausgeführt werden</string>
+    <string name="texto_error_url">Ungültige URL</string>
+    <string name="texto_exito">Der angeforderte Vorgang wurde korrekt ausgeführt</string>
+    <string name="titulo_confirmacion_eliminar">Eliminierungsbestätigung</string>
+    <string name="titulo_opcion_no">nein</string>
+    <string name="titulo_opcion_si">"ja  "</string>
+</resources>

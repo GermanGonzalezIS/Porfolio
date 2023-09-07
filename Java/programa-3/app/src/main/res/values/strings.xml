@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">Cliente Materias de 38192814</string>
+    <string name="Etiqueta_lista">Lista de Materias</string>
+    <string name="Hint_Clave">Clave de la Materia</string>
+    <string name="Hint_nombre">Nombre de la Materia</string>
+    <string name="texto_boton_agregar">Agregar</string>
+    <string name="texto_boton_eliminar">Eliminar</string>
+    <string name="texto_boton_guardar">Guardar</string>
+    <string name="texto_boton_nueva">Nueva</string>
+    <string name="texto_boton_regresar">Regreasar lista</string>
+    <string name="texto_confirmacion_eliminar">¿Estas seguro de que deseas eliminar este registro?</string>
+    <string name="texto_error_datos">Faltan Datos Obligatorios</string>
+    <string name="texto_error_es">Error de conexion al servidor</string>
+    <string name="texto_error_formato">Datos en forma incorrecta</string>
+    <string name="texto_error_operacion">No se pudo realizar la operacion</string>
+    <string name="texto_error_url">URL invalido</string>
+    <string name="texto_exito">Operacion Solicitada se realizo Correctamente</string>
+    <string name="hint_semestre_materia">Semestre</string>
+    <string name="url_base" translatable="false">\http://192.168.1.74:38680/ServiciosPrograma2/webresources/</string>
+    <string name="titulo_confirmacion_eliminar">Confirmacion de Eliminacion</string>
+    <string name="titulo_opcion_si">si</string>
+    <string name="titulo_opcion_no">no</string>
+</resources>
