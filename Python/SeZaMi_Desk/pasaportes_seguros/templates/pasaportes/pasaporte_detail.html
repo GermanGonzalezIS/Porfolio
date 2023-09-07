@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Detalles del trámite de apoyo a migrantes
+{% endblock titulo%}
+
+{% block colorFondo %}
+style="background-color: #9c7caf;"
+{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+ 
+{% block encabezado %} 
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-8">
+                Detalles del Pasaporte Americano 
+            </div>
+            <div class="col-md-auto">
+                {% if pasaporte.tramite.estado_id != 1 %}
+                    <form action="{% url 'tramites:actualizar' pasaporte.tramite.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="app" value="{{app}}">
+                        <input type="hidden" name="color" value="{{color}}">
+                        <button type="submit" class="btn btn-warning btn-lg" id="submit" value="Editar" name="botones-formulario">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                            Editar
+                        </button>
+                    </form>
+                {% else %}
+                    <a class="btn btn-warning btn-lg" href="{% url 'pasaportes:completar' pasaporte.id %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        Editar
+                    </a>
+                {% endif %}
+            </div>
+            {% if perms.pasaportes_seguros.delete_pasaporte %}
+            <div class="col-md-auto">
+                <button onclick="muestraModal('{% url 'pasaportes:eliminar' pasaporte.tramite.id %}')" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#eliminarModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                    Eliminar
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock encabezado %}
+
+{% block contenido %}
+<div id="svg_wrap">
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Datos personales</b></p>
+        <hr>
+        <div class="col-6">
+            <p><b>CURP: </b>{{pasaporte.curp}}</p>
+            <p><b>Apellido paterno: </b> {{pasaporte.tramite.beneficiario.primer_apellido}}</p>
+            <p><b>Apellido materno: </b> {{pasaporte.tramite.beneficiario.segundo_apellido}}</p>
+            <p><b>Nombre: </b>{{pasaporte.tramite.beneficiario.nombre}}</p>
+            </p>
+        </div>
+    </section>
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Estado de los documentos</b></p>
+            <hr>
+            <div class="col-8">
+            <p><b>Acta de nacimiento oficial: </b>{% if pasaporte.acta == 1 %}Entregada{% else %}No entregada{% endif %}</p>
+            <p><b>Seguro social: </b>{% if pasaporte.seguro_social == 1 %}Entregada{% else %}No entregada{% endif %}</p>
+            <p><b>Identificación de los padres: </b>{% if pasaporte.identificacion_padres == 1 %}Entregadas{% else %}No entregadas{% endif %}</p>
+            <p><b>Nombre contacto en Estados Unidos: </b>{% if pasaporte.nombre_contacto_usa != None %}{{pasaporte.nombre_contacto_usa}}{% else %}No entregado{% endif %}</p>
+            <p><b>Dirección contacto en Estados Unidos: </b>{% if pasaporte.direccion_usa != None %}{{pasaporte.direccion_usa}}{% else %}No entregada{% endif %}</p>
+            <p><b>Teléfono contacto en Estados Unidos: </b>{% if pasaporte.tel_contacto_usa != None %}{{pasaporte.tel_contacto_usa}}{% else %}No entregado{% endif %}</p>
+            <p><b>Correo electrónico: </b>{% if pasaporte.correo != None %}{{pasaporte.correo}}{% else %}No entregado{% endif %}</p>
+            </p>
+        </div>
+    </section>
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Estado del trámite</b></p>
+            <hr>
+        <div class="col-6">
+            <p><b>Estado del trámite: </b>{{pasaporte.tramite.estado}}</p>
+            <p><b>Fecha de inicio del trámite: </b>{{pasaporte.tramite.fecha_inicio}}</p>
+        </div>
+    </section>
+</div>
+<a href="{% url 'pasaportes:lista' %}" class="btn btn-secondary btn-lg">Regresar</a> 
+<br> 
+    <!-- <div id="prev"><a  class="btn btn-secondary" href = "{% url 'beneficiarios:principal' %}">Regresar</a></div>
+    <div id="next"><a  class="btn btn-primary" href = "{% url 'beneficiarios:principal' %}">Editar</a></div> -->
+
+    <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+    <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+    después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+<br>
+
+<form id="formEliminar" method="POST">
+    {% csrf_token %}
+</form>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/modales.js' %}"></script>
+    <script>
+        function muestraModal(url){
+            Swal.fire({
+                title: '¿Está seguro que desea eliminar el registro?',
+                text: "¡No podrás revertir esta acción!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, estoy seguro',
+                cancelButtonText: 'Cancelar'
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    document.getElementById('formEliminar').action = url;
+                    document.getElementById('formEliminar').submit();
+                }
+            })
+        }
+    </script>
+{% endblock %}

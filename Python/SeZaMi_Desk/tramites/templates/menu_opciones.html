@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Ferias binacionales
+{% endblock titulo %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block encabezado %}
+    Ferias binacionales
+{% endblock encabezado %}
+
+
+{% block contenido %}
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title" >Licencia de conducir</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'licencia_conducir:pedir_curp'  %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'licencia_conducir:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title" >Doble ciudadanía</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="" class="btn btn-success" >Nueva solicitud</a>
+      <a href="" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title" >Constancia de estudios</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'constancia_estudios:pedir_curp' %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'constancia_estudios:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title" >Registro de mandamientos judiciales (Carta de no antecedentes penales)</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'mandamientos_judiciales:pedir_curp' %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'mandamientos_judiciales:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title">Defensoría pública</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'defensoria_publica:pedir_curp' %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'defensoria_publica:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title">Expedición de acta</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'expedicion_acta:pedir_curp' %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'expedicion_acta:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h5 class="card-title">Trámite administrativo (Corrección de acta)</h5>
+    </div>
+    <div class="col-sm">
+      <hr>
+    </div>
+    <div class="col-sm">
+      <a href="{% url 'correccion_acta:pedir_curp' %}" class="btn btn-success" >Nueva solicitud</a>
+      <a href="{% url 'correccion_acta:lista' %}" class="btn btn-primary" >Lista de solicitudes</a>
+    </div>
+  </div>
+</div>
+<p></p>
+{% endblock contenido %}

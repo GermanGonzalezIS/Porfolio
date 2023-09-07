@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Mi perfil
+{% endblock %}
+
+{% block colorFondo %}
+style="background-color: #adadad;"
+{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            Mi perfil
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block contenido %}
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Datos del Usuario</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Nombre(s): </b>{{empleado.first_name}}</p>
+            <p><b>Primer apellido: </b> {{empleado.last_name}}</p>
+            <p><b>Segundo apellido: </b> {{empleado.segundo_apellido}}</p>
+            <p><b>Nombre de usuario: </b> {{empleado.username}}</p>
+            <p><b>Teléfono: </b>{{empleado.telefono}}</p>
+            <p><b>Grupo: </b>{{empleado.grupo}}</p>
+            <p><b>Contraseña: </b>{{empleado.contra}}</p>
+        </section>
+    </div>
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Permisos del Usuario</b></p>
+            <hr>
+            <div class="col-6">
+            {% if admin %}
+                <p>{{admin}}</p>
+            {% else %}
+                {% for permiso in permisos %}
+                    <p>{{permiso.name}}</p>
+                {% endfor %}
+            {% endif %}
+        </section>
+    </div>
+    <a href="" class="btn btn-secondary btn-lg">Regresar</a>
+    <br>
+    <br>
+{% endblock contenido %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+Editar trámite
+{% endblock titulo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block colorFondo %}
+style="background-color: {{color}};"
+{% endblock colorFondo %}
+
+{% block encabezado %}
+Editar trámite
+{% endblock encabezado %}
+
+{% block contenido %}
+    <form method="post" action="{% url 'tramites:guardar_acualizacion' tramite.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <section>
+            {{ form.as_p }}
+            <input type="hidden" name="app" value="{{app}}">
+        </section>
+        <div id="prev">
+            <button type="submit" class="btn btn-primary btn-lg">Aceptar</button>
+            <a href="{% url app %}" class="btn btn-secondary btn-lg">Cancelar</a>
+        </div>
+    </form>
+{% endblock contenido %}

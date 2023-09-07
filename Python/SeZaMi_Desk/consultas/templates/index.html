@@ -1,0 +1,76 @@
+{% extends 'base_consultas.html' %}
+
+{% load static %}
+
+{% block titulo %}
+SEZAMI Desk
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #a2f7b5;"
+{% endblock colorFondo %}
+
+{% block css %}
+<link href="{% static 'css/consultas.css' %}" rel="stylesheet" />
+{% endblock css %}
+
+{% block contenido %}
+  <br>
+<div class="jumbotron jumbotron-consulta">
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <div class="row">
+          <h1>
+            <strong>Consultar estado de trámite</strong>
+          </h1>
+          <p style="text-align: justify;">Aquí usted puede consultar el estado del trámite que solicitó en las 
+            oficinas de la <b>Secretaría del Zacatecano Migrante</b> utilizando su <b>Clave Única de Registro de Población</b> (CURP).</p>
+        </div>
+        <div class="row">
+          <form method="post" action="{% url 'consultas:lista' %}" id="consulta_form" class="consulta-form">
+            {% csrf_token %}
+            <div class="col">
+              <div class="row justify-content-between">
+                {{form}} 
+              </div>
+              <br>
+              <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary">Consultar trámite</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-1" style="border-right: 1px solid #333;"></div>
+      <div class="col-1"></div>
+      
+      <div class="col-5">
+        <div class="row">
+          <h1 style="font-size:49px;">
+            <strong>Consultar estatus de solicitud</strong>
+          </h1>
+          <p style="text-align: justify;">Aquí usted puede consultar el estatus o los datos generales de la solicitud que realizó en las 
+            oficinas de la <b>Secretaría del Zacatecano Migrante</b> (localización de personas, traslado de cuerpos o visa) 
+            utilizando el <b>folio de búsqueda</b> que se le proporcionó.</p>
+        </div>
+        <div class="row">
+          <form method="post" action="{% url 'consultas:detalle_solicitud' %}" id="consulta_form" class="consulta-form">
+            {% csrf_token %}
+            <div class="col">
+              <div class="row justify-content-between">
+                {{formFolio}} 
+              </div>
+              <br>
+              <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary">Consultar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}

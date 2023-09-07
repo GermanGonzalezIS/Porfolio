@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Detalles del trámite de atención a migrantes
+{% endblock titulo%}
+
+{% block colorFondo %}style="background-color: #cacde0;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Editar trámite de atención a migrantes 
+            </div>
+        </div>
+    </div>
+{% endblock encabezado %}
+
+{% block contenido %}
+<div id="svg_wrap">
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Datos personales</b></p>
+        <hr>
+        <div class="col-6">
+            <form action="">
+                <input name="tramite" type="hidden" value="{{tramite.id}}">
+                <select id="select" name="select" class="form-select" aria-label="Default select example">
+                    {% for estado in estados %}
+                        {% if tramite.estado == estado %}
+                            <option selected="true" value="{{estado.id}}">{{estado.estado}}</option>
+                        {% else %}
+                            <option value="{{estado.id}}" >{{estado.estado}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+                <a href="{% url 'atencion_migrantes:detalle' atencion_migrante.id %}" class="btn btn-secondary">Cancelar</a>
+                {% csrf_token %}
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

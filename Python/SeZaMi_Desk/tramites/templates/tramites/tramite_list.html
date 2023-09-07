@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+    Lista de trámites
+{% endblock titulo %}
+
+{% block encabezado %}
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            Lista de trámites
+        </div>
+    </div>
+</div> 
+{% endblock encabezado %}
+
+{% block contenido %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Información de trámites
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Beneficiario</th>
+                    <th>Empleado</th>
+                    <th>Estado del trámite</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de finalización</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Beneficiario</th>
+                    <th>Empleado</th>
+                    <th>Estado</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de finalización</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for tramite in object_list %}
+                <tr {% if tramite.estado_id == 1 %} style="background-color: #df5d66d7;" 
+                {% elif tramite.estado_id == 2 %} style="background-color: #47b4e6d8;" 
+                {% elif tramite.estado_id == 3 %} style="background-color: #ead249d5;" 
+                {% else %} style="background-color: #3fd61962;" {% endif %}>
+                        <td>{{tramite.id}}</td>
+                        <td>{{tramite.beneficiario.nombre}} {{tramite.beneficiario.primer_apellido}} {{tramite.beneficiario.segundo_apellido}}</td>
+                        <td>{{tramite.empleado}}</td>
+                        <td>{{tramite.estado}}</td>
+                        <td>{{tramite.fecha_inicio}}</td>
+                        <td>{{tramite.fecha_fin}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+    Detalles del trámite Corazón de Plata    
+{% endblock titulo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #f8cac8;"{% endblock colorFondo %}
+
+{% block encabezado %}
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                Detalles del trámite Corazón de Plata 
+            </div>
+            <div class="col-1">
+                {% if corazonplata.tramite.estado_id != 1 %}
+                    <a  class="btn btn-primary" href = "{% url 'corazon_plata:completar' corazonplata.id %}" style="display: inline;">Editar</a>
+                {% else %}
+                    <form action="{% url 'corazon_plata:verificar_curp' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="curp" value="{{corazonplata.curp}}">
+                        <input type="submit" class="btn btn-primary" id="submit" value="Editar" name="botones-formulario">
+                    </form>
+                {% endif %}
+            </div>
+            <div class="col-1">
+                <button onclick="muestraModal('{% url 'corazon_plata:eliminar' corazonplata.id %}')" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+{% endblock encabezado %}
+
+
+{% block contenido %}
+<div id="svg_wrap">
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Datos personales</b></p>
+        <hr>
+        <div class="col-6">
+            <p><b>Apellido paterno: </b> {{corazonplata.ap_paterno_ahijado}}</p>
+            <p><b>Apellido materno: </b> {{corazonplata.ap_materno_ahijado}}</p>
+            <p><b>Nombre: </b>{{corazonplata.nombre_ahijado}}</p>
+            </p>
+        </div>
+    </section>
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Estado de los documentos</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Número de grupo al que pertence el ahijado: </b><b style="color: rgb(54, 54, 187);">{{corazonplata.grupo_visa_id}}</b></p>
+            <p><b>Credencial del ahijado: </b>{% if corazonplata.credencial == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>Pasaporte del ahijado: </b>{% if corazonplata.pasaporte == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>CURP del ahijado: </b>{% if corazonplata.curp == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>El ahijado reside en zacatecas: </b>{% if corazonplata.persona_zacatecana == 1 %}Si{% else %}No{% endif %}</p>
+            <p><b>Certificado médico: </b>{% if corazonplata.certificado_medico == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>Existe un padrino perteneciente a alguna organización: </b>{% if corazonplata.padrino == 1 %}Si{% else %}No{% endif %}</p>
+            <p><b>El ahijado está libre de antecedentes migratorios negativos: </b>{% if corazonplata.no_antecedentes == 1 %}Si{% else %}No{% endif %}</p>
+        </div>
+    </section>
+</div>
+        
+    <!-- <div id="prev"><a  class="btn btn-secondary" href = "{% url 'beneficiarios:principal' %}">Regresar</a></div>
+    <div id="next"><a  class="btn btn-primary" href = "{% url 'beneficiarios:principal' %}">Editar</a></div> -->
+
+    <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+    <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+    después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+
+<br>
+
+
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminando beneficiario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalCuerpo">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form id="formEliminar" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sí</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block js %}
+    <script src="{% static 'js/modales.js' %}"></script>
+{% endblock %}

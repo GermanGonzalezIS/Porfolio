@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+Seleccionar Grupo
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #adadad;"
+{% endblock colorFondo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">  
+{% endblock css %}
+
+{% block encabezado %}
+Seleccionar Grupo
+{% endblock encabezado %}
+
+{% block contenido %}
+<br>
+<h5>Empleado "{{empleado}}"</h5>
+<br>
+<form action="{% url 'empleados:seleccionar-permisos' %}" method="POST">
+    <input name="empleado" type="hidden" value="{{empleado.id}}">
+    <select id="select" name="select" class="form-select" aria-label="Default select example">
+        {% for grupo in grupos %}
+            {% if empleado.grupo == grupo %}
+                <option selected="true" value="{{grupo.id}}">{{ grupo.grupo }}</option>
+            {% else %}
+                <option value="{{grupo.id}}" >{{grupo.grupo}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Seleccionar</button>
+    <a href="{% url 'empleados:detalle' empleado.id %}" class="btn btn-secondary">Cancelar</a>
+    {% csrf_token %}
+</form>
+{% endblock contenido %}

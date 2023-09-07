@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Visas
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #f6d9b4;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-8">
+                Detalle de la Visa
+            </div>
+            {% if perms.visas.change_visa %}
+                <div class="col-md-auto">
+                    <a class="btn btn-warning btn-lg" href="{% url 'visas:editar' visa.folio %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        Editar
+                    </a>
+                </div>
+            {% endif %}
+            {% if perms.visas.delete_visa %}
+                <div class="col-md-auto">
+                    <button onclick="eliminarRegistro('{% url 'visas:eliminar' visa.folio %}')" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#eliminarModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        Eliminar
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock encabezado %}
+
+{% block contenido %}
+    <div>
+        <section> 
+            <p><b>Datos generales del solicitante</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Folio: </b>{{visa.folio}}</p>
+            <p><b>Apellido paterno: </b> {{visa.apellido_paterno_solicitante}}</p>
+            <p><b>Apellido materno: </b> {{visa.apellido_materno_solicitante}}</p>
+            <p><b>Nombre: </b>{{visa.nombre_solicitante}}</p>
+        </section>
+    </div>    
+    <div>
+        <section> 
+            <p><b>Información del trámite</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Pasaporte: </b>{% if visa.pasaporte == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>Direccion de Estados Unidos: </b>{{visa.direccion_usa}}</p>
+            <p><b>Nombre de la persona a visitar: </b>{{visa.persona_visitar}}</p>
+            <p><b>Teléfono de la persona a visitar: </b>{{visa.tel_persona_visitar}}</p>
+            <p><b>Fecha de nacimiento de la madre: </b>{{visa.fe_nacimiento_madre}}</p>
+            <p><b>Fecha de nacimiento del padre: </b>{{visa.fe_nacimiento_padre}}</p>
+            <p><b>Dirección del lugar de trabajo o escuela: </b>{{visa.dir_trabajo_escuela}}</p>
+            <p><b>Fecha de ingreso al trabajo o escuela: </b>{{visa.fe_ingreso_trabajo_escuela}}</p>
+            <p><b>Ingreso mensual: </b>{{visa.ingreso_mensual}}</p>
+            <p><b>Fecha tentativa de viaje: </b>{{visa.fecha_viaje}}</p>
+            <p><b>Correo: </b>{{visa.correo}}</p>
+            <p><b>Red social: </b>{{visa.red_social}}</p>
+            <p><b>Pago: </b>{% if visa.pago == 1 %}Entregado{% else %}No entregado{% endif %}</p>
+            <p><b>Fecha cita: </b>{% if visa.fecha_cita == 1 %}{{fecha_cita}}{% else %}Sin asignar{% endif %}</p>
+        </section>
+    </div>    
+    <div>
+        <section> 
+            <p><b>Redes sociales</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Red Social 1: </b>{% if visa.red_social_uno %}{{visa.red_social_uno}}{% else %}No tiene{% endif %}</p>
+            <p><b>Nombre de usuario: </b>{% if visa.usuario_uno %}{{visa.usuario_uno}}{% else %}No tiene{% endif %}</p>
+            <p><b>Red Social 2: </b>{% if visa.red_social_dos %}{{visa.red_social_dos}}{% else %}No tiene{% endif %}</p>
+            <p><b>Nombre de usuario: </b>{% if visa.usuario_dos %}{{visa.usuario_dos}}{% else %}No tiene{% endif %}</p>
+            <p><b>Red Social 3: </b>{% if visa.red_social_tres %}{{visa.red_social_tres}}{% else %}No tiene{% endif %}</p>
+            <p><b>Nombre de usuario: </b>{% if visa.usuario_tres %}{{visa.usuario_tres}}{% else %}No tiene{% endif %}</p>
+        </section>
+    </div>   
+    <div>
+        <section> 
+            <p><b>Datos del asesor</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>Nombre de usuario: </b>{{visa.empleado.username}}</p>
+            <p><b>Nombre: </b> {{visa.empleado.first_name}}</p>
+            <p><b>Telefono: </b> {{visa.empleado.telefono}}</p>
+        </section>
+    </div>   
+    <div>
+        <a class="btn btn-secondary btn-lg" href="{% url 'visas:lista' %}">Regresar</a>
+    </div>     
+    
+    <!-- Formulario que se utiliza para eliminar un registro especifico -->
+    <form id="formEliminarRegistro" method="POST">
+        {% csrf_token %}
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/modales.js' %}"></script>
+{% endblock %}

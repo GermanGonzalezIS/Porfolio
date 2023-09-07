@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{ etiqueta }} trámite de pasaporte americano
+{% endblock %}
+
+{% block colorFondo %}
+style="background-color: #9c7caf;"
+{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+    {{ etiqueta }} trámite de pasaporte americano
+{% endblock %}
+{% block contenido %}
+<!-- ***************** DATOS DEL TRAMITE *****************  -->
+<form method="post" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.acta}}
+                    <label for="acta">Acta de nacimiento oficial</label>
+                </p>
+                <p>
+                    {{form.seguro_social}}
+                    <label for="seguro_social">Seguro Social</label>
+
+                </p>
+                <p>
+                    {{form.identificacion_padres}}
+                    <label for="identificacion_padres">Identificacion de los padres</label>
+                </p>
+                <p>
+                    <label for="nombre_contacto_usa">Nombre del contacto en Estados Unidos</label>
+                    {{form.nombre_contacto_usa}}
+                </p>
+                <p>
+                    <label for="direccion_usa">Dirección del contacto en Estados Unidos</label>
+                    {{form.direccion_usa}}
+                </p>
+                <p>
+                    <label for="tel_contacto_usa">Teléfono del contacto en Estados Unidos</label>
+                    {{form.tel_contacto_usa}}
+                </p>
+                <p>
+                    <label for="correo">Correo Electrónico</label>
+                    {{form.correo}}
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'pasaportes:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+    </div>
+    <!--Es el botón que va a enviar el formulario-->    
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

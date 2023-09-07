@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Tramites
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} Detalle de los trámites {% endblock %}
+{% block contenido %}
+
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Datos del trámite</b></p>
+            <hr>
+            <div class="col-6">
+            <p><b>ID trámite: </b>{{tramite.id}}</p>
+            <p><b>Beneficiario: </b>{{tramite.beneficiario.nombre}} {{tramite.beneficiario.primer_apellido}} {{tramite.beneficiario.segundo_apellido}}</p>
+            <p><b>CURP Beneficiario: </b>{{tramite.beneficiario.curp}}</p>
+            <p><b>Empleado: </b> {{tramite.empleado}}</p>
+            <p><b>Estado del trámite: </b>{{tramite.estado}}</p>
+            <p><b>Fecha de inicio: </b>{{tramite.fecha_inicio}}</p>
+            <p><b>Fecha de finalización: </b>{{tramite.fecha_fin}}</p>
+        </section>
+    </div>   
+
+    <a type="button" class="btn btn-primary" href="{% url 'tramites:lista_tramite' %}">Regresar</a>
+    
+{% endblock contenido %}

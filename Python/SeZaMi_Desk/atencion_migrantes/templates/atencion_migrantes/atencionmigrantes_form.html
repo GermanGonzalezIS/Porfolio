@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{ etiqueta }} trámite de atención a migrantes
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #cacde0;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+    {{ etiqueta }} trámite de apoyo a migrantes
+{% endblock %}
+{% block contenido %}
+<!-- ***************** DATOS DEL TRAMITE *****************  -->
+<form method="post" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.identificacion_oficial}}
+                    <label for="identificacion_oficial">Identificación oficial</label>
+                </p>
+                <p>
+                    {{form.curp_doc}}
+                    <label for="curp_doc">CURP</label>
+
+                </p>
+                <p>
+                    {{form.rfc}}
+                    <label for="rfc">RFC</label>
+                </p>
+                <p>
+                    {{form.solicitud_gobernador}}
+                    <label for="solicitud_gobernador">Solicitud al gobernador</label>
+                </p>
+                <p>
+                    {{form.hoja_deportacion}}
+                    <label for="hoja_deportacion">Hoja de deportación</label>
+                </p>
+                <p>
+                    {{form.comprobante_domicilio}}
+                    <label for="comprobante_domicilio">Comprobante de domicilio</label>
+                </p>
+                <p>
+                    {{form.acta_nacimiento}}
+                    <label for="acta_nacimiento">Acta de nacimiento</label>
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'atencion_migrantes:principal' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+    </div>
+    <!--Es el botón que va a enviar el formulario-->    
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

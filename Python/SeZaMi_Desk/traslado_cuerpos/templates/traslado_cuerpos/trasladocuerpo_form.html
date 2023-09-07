@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Traslado de cuerpos
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #e6ddd1;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de traslado de cuerpo
+{% endblock %}
+{% block contenido %}
+    <form method="POST" id="tramite">
+        {% csrf_token %}
+        {{form.folio}}
+        {{form.empleado}}
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Datos del fallecido</b></p>
+                <hr>
+                <p style="display: inline;">
+                    <p>
+                        {{form.nombre_fallecido.errors}}
+                        {{form.nombre_fallecido.label_tag}}
+                        {{form.nombre_fallecido}}
+                    </p>
+                    <p>
+                        {{form.fecha_nacimiento.errors}}
+                        {{form.fecha_nacimiento.label_tag}}
+                        {{form.fecha_nacimiento}}
+                    </p>
+                    <p>
+                        {{form.fecha_deceso.errors}}
+                        {{form.fecha_deceso.label_tag}}
+                        {{form.fecha_deceso}}
+                    </p>
+                    <p>
+                        {{form.causa_muerte.errors}}
+                        {{form.causa_muerte.label_tag}}
+                        {{form.causa_muerte}}
+                    </p>
+                    <p>
+                        {{form.lugar_deceso.errors}}
+                        {{form.lugar_deceso.label_tag}}
+                        {{form.lugar_deceso}}
+                    </p>
+                    <p>
+                        {{form.lugar_origen.errors}}
+                        {{form.lugar_origen.label_tag}}
+                        {{form.lugar_origen}}
+                    </p>
+                    <p>
+                        {{form.situacion_migratoria.errors}}
+                        {{form.situacion_migratoria.label_tag}}
+                        {{form.situacion_migratoria}}
+                    </p>
+                </p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Tiempo en Estados Unidos</b></p>
+                <hr>
+                <p style="display: inline;">
+                    <p>
+                        {{form.anios_en_eu.errors}}
+                        {{form.anios_en_eu.label_tag}}
+                        {{form.anios_en_eu}}
+                    </p>
+                    <p>
+                        {{form.meses_en_eu.errors}}
+                        {{form.meses_en_eu.label_tag}}
+                        {{form.meses_en_eu}}
+                    </p>
+                </p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Datos del familiar en México</b></p>
+                <hr>
+                <p style="display: inline;">
+                    <p>
+                        {{form.nombre_familiar_mexicano.errors}}
+                        {{form.nombre_familiar_mexicano.label_tag}}
+                        {{form.nombre_familiar_mexicano}}
+                    </p>
+                    <p>
+                        {{form.telefono.errors}}
+                        {{form.telefono.label_tag}}
+                        {{form.telefono}}
+                    </p>
+                </p>
+            </div>
+        </section>
+        <div id="prev">
+            <a class="btn btn-secondary btn-lg" href="{% url 'traslado_cuerpos:lista' %}" name="botones-formulario">Regresar</a>    
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" value="Guardar" name="botones-formulario">
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Doble nacionalidad
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de doble nacionalidad
+{% endblock %}
+{% block contenido %}
+<form method="POST">
+    {% csrf_token %}
+    {{form.folio}}
+    {{form.empleado}}
+    {{form.tramite_estado}}
+    <section>
+        <div class="container">
+	    <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    <label for="id_nombre">Nombre</label> 
+                    {{form.nombre}}
+                </p>
+                <p>
+                    <label for="id_apellido_paterno">Apellido paterno</label> 
+                    {{form.apellido_paterno}}
+                </p>
+                <p>
+                    <label for="id_apellido_materno">Apellido materno </label> 
+                    {{form.apellido_materno}}
+                </p>
+                <p>
+                    {{form.acta_nacimiento_original}}
+                    <label for="id_acta_nacimiento_original">Acta de nacimiento original y expedición reciente </label> 
+                </p>
+                <p>
+                    {{form.actas_apostilladas}}
+                    <label for="id_actas_apostilladas">Actas debidamente apostilladas (del interesado) </label> 
+                </p>
+                <p>
+                    {{form.comprobante_domicilio}}
+                    <label for="id_comprobante_domicilio">Comprobante de domicilio </label> 
+                </p>
+                <p>
+                    {{form.identificacion_oficial}}
+                    <label for="id_identificacion_oficial">Identificación oficial con fotografía de los padres</label> 
+                </p>
+                <p>
+                    {{form.original_copias}}
+                    <label for="id_original_copias">Original y 2 copias tamaño carta </label> 
+                </p>
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'doble_nacionalidad:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

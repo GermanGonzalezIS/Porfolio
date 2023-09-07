@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+{{ etiqueta }} Usuario
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #adadad;"
+{% endblock colorFondo %}
+
+{% block encabezado %}
+{{ etiqueta }} Usuario
+{% endblock encabezado %}
+
+{% block contenido %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{{ btn }}</button>
+        <a class="btn btn-secondary" href="{% url 'empleados:lista' %}">Cancelar</a>
+    </form>
+    <br>
+{% endblock contenido %}
+

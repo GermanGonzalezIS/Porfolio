@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{ etiqueta }} Persona desaparecida
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #fcb7af;"{% endblock colorFondo %}
+
+{% block encabezado %}
+    {{ etiqueta }} Persona desaparecida
+{% endblock %}
+{% block contenido %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form.folio}}
+        {{form.empleado}}
+        <!-- Para organizar de mejor manera los campos que se tienen que rellenar, se separan los datos de la persona desaparecida,
+        los datos de la desaparición y los datos del solicitante, en tres secciones diferentes -->
+        {% if etiqueta == "Registrar" or grupo_admin == True %}
+            <section>
+                <div class="container">
+                    <p style="display: inline;"><b>Datos de la persona desaparecida</b></p>
+                    <hr>
+                    <p style="display: inline;">
+                        <p>
+                            {{form.nombre_desaparecido.errors}}
+                            {{form.nombre_desaparecido.label_tag}}
+                            {{form.nombre_desaparecido}}
+                        </p>
+                        <p>
+                            {{form.apellido_paterno_desaparecido.errors}}
+                            {{form.apellido_paterno_desaparecido.label_tag}}
+                            {{form.apellido_paterno_desaparecido}}
+                        </p>
+                        <p>
+                            {{form.apellido_materno_desaparecido.errors}}
+                            {{form.apellido_materno_desaparecido.label_tag}}
+                            {{form.apellido_materno_desaparecido}}
+                        </p>
+                        <p>
+                            {{form.direccion_desaparecido.errors}}
+                            {{form.direccion_desaparecido.label_tag}}
+                            {{form.direccion_desaparecido}}
+                        </p>
+                        <p>
+                            {{form.fecha_nacimiento_desaparecido.errors}}
+                            {{form.fecha_nacimiento_desaparecido.label_tag}}
+                            {{form.fecha_nacimiento_desaparecido}}
+                        </p>
+                    </p>
+                </div>
+            </section>
+
+            <section> 
+                <div class="container">
+                    <p style="display: inline;"><b>Datos generales de la desaparición</b></p>
+                    <hr>
+                    <p style="display: inline;">
+                        <p>
+                            {{form.estatus.errors}}
+                            {{form.estatus.label_tag}}
+                            {{form.estatus}}
+                        </p>
+                        <p>
+                            {{form.ultimo_lugar.errors}}
+                            {{form.ultimo_lugar.label_tag}}
+                            {{form.ultimo_lugar}}
+                        </p>
+                        <p>
+                            {{form.fecha_desaparicion.errors}}
+                            {{form.fecha_desaparicion.label_tag}}
+                            {{form.fecha_desaparicion}}
+                        </p>
+                        <p>
+                            {{form.observaciones.errors}}
+                            {{form.observaciones.label_tag}}
+                            {{form.observaciones}}
+                        </p>
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <div class="container"> 
+                    <p style="display: inline;"><b>Datos del solicitante</b></p>
+                    <hr>
+                    <p style="display: inline;">
+                        <p>
+                            {{form.nombre_solicitante.errors}}
+                            {{form.nombre_solicitante.label_tag}}
+                            {{form.nombre_solicitante}}
+                        </p>
+                        <p>
+                            {{form.apellido_paterno_solicitante.errors}}
+                            {{form.apellido_paterno_solicitante.label_tag}}
+                            {{form.apellido_paterno_solicitante}}
+                        </p>
+                        <p>
+                            {{form.apellido_materno_solicitante.errors}}
+                            {{form.apellido_materno_solicitante.label_tag}}
+                            {{form.apellido_materno_solicitante}}
+                        </p>
+                        <p>
+                            {{form.parentesco.errors}}
+                            {{form.parentesco.label_tag}}
+                            {{form.parentesco}}
+                        </p>
+                        <p>
+                            {{form.telefono_solicitante.errors}}
+                            {{form.telefono_solicitante.label_tag}}
+                            {{form.telefono_solicitante}}
+                        </p>
+                    </p>
+                </div>
+            </section>
+        {% else %}
+            <section> 
+                <div class="container">
+                    <p style="display: inline;"><b>Actualizar datos generales de la desaparición</b></p>
+                    <hr>
+                    <p style="display: inline;">
+                        {{form.nombre_desaparecido.as_hidden}}
+                        {{form.apellido_paterno_desaparecido.as_hidden}}
+                        {{form.apellido_materno_desaparecido.as_hidden}}
+                        {{form.direccion_desaparecido.as_hidden}}
+                        {{form.fecha_nacimiento_desaparecido.as_hidden}}
+                        {{form.fecha_desaparicion.as_hidden}}
+                        {{form.nombre_solicitante.as_hidden}}
+                        {{form.apellido_paterno_solicitante.as_hidden}}
+                        {{form.apellido_materno_solicitante.as_hidden}}
+                        {{form.parentesco.as_hidden}}
+                        {{form.telefono_solicitante.as_hidden}}
+                        <p>
+                            {{form.estatus.errors}}
+                            {{form.estatus.label_tag}}
+                            {{form.estatus}}
+                        </p>
+                        <p>
+                            {{form.ultimo_lugar.errors}}
+                            {{form.ultimo_lugar.label_tag}}
+                            {{form.ultimo_lugar}}
+                        </p>
+                        <p>
+                            {{form.observaciones.errors}}
+                            {{form.observaciones.label_tag}}
+                            {{form.observaciones}}
+                        </p>
+                    </p>
+                </div>
+            </section>
+        {% endif %}
+            
+        <div id="prev">  
+            <a class="btn btn-secondary btn-lg" href="{% url 'localizacion_personas:lista' %}" name="botones-formulario">Regresar</a>    
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+{% endblock %}

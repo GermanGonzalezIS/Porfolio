@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Localizacion de personas
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #fcb7af;"{% endblock colorFondo %}
+
+{% block encabezado %} 
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-8">
+                Detalles de la persona desaparecida
+            </div>
+            {% if perms.localizacion_personas.change_personadesaparecida %}
+                <div class="col-md-auto">
+                    <a class="btn btn-warning btn-lg" href="{% url 'localizacion_personas:editar' persona.folio %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        Editar
+                    </a>
+                </div>
+            {% endif %}
+            {% if perms.localizacion_personas.delete_personadesaparecida %}
+                <div class="col-md-auto">
+                    <button onclick="eliminarRegistro('{% url 'localizacion_personas:eliminar' persona.folio %}')" type="button" class="btn btn-danger btn-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                        Eliminar
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block contenido %}
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Datos generales de la persona desaparecida</b></p>
+            <hr>
+            <div class="col-6">
+                <p><b>Folio de la desaparición: </b>{{persona.folio}}</p>
+                <p><b>Apellido paterno: </b> {{persona.apellido_paterno_desaparecido}}</p>
+                {% if persona.apellido_materno_desaparecido != None %} <!-- Solo muestra el apellido materno en caso de que haya sido capturado--> 
+                    <p><b>Apellido materno: </b> {{persona.apellido_materno_desaparecido}}</p>
+                {% endif %}
+                <p><b>Nombre: </b>{{persona.nombre_desaparecido}}</p>
+                {% if persona.direccion_desaparecido != None %}
+                    <p><b>Dirección: </b>{{persona.direccion_desaparecido}}</p>
+                {% endif %}
+                {% if persona.fecha_nacimiento_desaparecido != None %}
+                    <p><b>Fecha de nacimiento: </b>{{persona.fecha_nacimiento_desaparecido}}</p>    
+                {% endif %}     
+            </div>
+        </section>
+    </div>
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Datos generales de la desaparición</b></p>
+            <hr>
+            <div class="col-6">
+                <p><b>Estatus: </b>{{persona.estatus}}</p>
+                <p><b>Último lugar dónde se sabe al desaparecido(a): </b> {{persona.ultimo_lugar}}</p>
+                <p><b>Fecha de desaparición: </b> {{persona.fecha_desaparicion}}</p>
+                <p><b>Observaciones: </b>{{persona.observaciones}}</p>
+            </div>
+        </section>
+    </div>    
+    <div id="svg_wrap">
+        <section> 
+            <p><b>Datos generales del solicitante</b></p>
+            <hr>
+            <div class="col-6">
+                <p><b>Apellido paterno: </b> {{persona.apellido_paterno_solicitante}}</p>
+                {% if persona.apellido_materno_solicitante != None %}
+                    <p><b>Apellido materno: </b> {{persona.apellido_materno_solicitante}}</p>    
+                {% endif %}
+                <p><b>Nombre: </b>{{persona.nombre_solicitante}}</p>
+                <p><b>Parentesco: </b>{{persona.parentesco}}</p>
+                {% if persona.telefono_solicitante != None %}
+                    <p><b>Número de télefono: </b>{{persona.telefono_solicitante}}</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+    <a class="btn btn-secondary btn-lg" href="{% url 'localizacion_personas:lista'%}">Regresar</a>
+    
+    <!-- Formulario que se utiliza para eliminar un registro especifico de una persona desaparecida -->
+    <form id="formEliminarRegistro" method="POST">
+        {% csrf_token %}
+    </form>
+    <br>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/modales.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Trámite
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<div class="container">
+    {% if messages %}
+       {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-10">
+            Generar CURP
+        </div>
+    </div>
+</div> 
+{% endblock encabezado %}
+
+{% block contenido %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div id="svg_wrap">
+        <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+        </div>
+        <section>
+            <div class="container">
+                <p style="display: inline;">
+                    {{form.as_p}}
+                </p>
+            </div>
+        </section>
+        <div id="prev">
+            <a href="{% url app %}" class="btn btn-secondary btn-lg">Cancelar</a>
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" value="Siguiente">
+        </div>
+        <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+        <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+        después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+    </form>
+    <br>
+{% endblock %}

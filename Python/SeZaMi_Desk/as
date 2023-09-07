@@ -1,0 +1,203 @@
+[33mcommit db333e974b4d815d60d8edee8a9fcd84d73f6383[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Thu Jul 22 10:39:39 2021 -0500
+
+    Implementación para editar, ver y eliminar los registros de Traslado de Cuerpos
+
+[33mcommit 00e374d8cf831d7c760880b59fda58046758ecc6[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Wed Jul 21 13:40:12 2021 -0500
+
+    Implementación para agregar registros de Traslado de Cuerpos
+
+[33mcommit 77003a6a131a6cb8e84ee4152f8c333b720c9432[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Wed Jul 21 13:19:06 2021 -0500
+
+    Implementación del formulario para crear un registro de Traslado de Cuerpos
+
+[33mcommit bacace6ab449ec0ea7a129a5edcf95547399f698[m
+Merge: 2d391d1 039e9bb
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Wed Jul 21 11:41:14 2021 -0500
+
+    Merge branch 'master' of https://gitlab.com/juanca_14/sezamidesk
+
+[33mcommit 2d391d1c1e0bd04e909ede986fef1e92ed07e2b8[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Wed Jul 21 11:41:01 2021 -0500
+
+    Comentarios.
+    
+    Se añadieron comentarios al código de la aplicación pasaportes_seguros.
+
+[33mcommit 039e9bb909a1c460db1c4038758bfd7fa3dd7e3b[m
+Merge: a5ddf1c 24a0108
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 20 15:22:03 2021 -0500
+
+    Merge branch 'master' of https://gitlab.com/juanca_14/sezamidesk
+
+[33mcommit a5ddf1cf8fcaa253a48b98b3ec60a1944e690140[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 20 15:21:59 2021 -0500
+
+    Se creó la vista para la lista de trámites de Traslados de Cuerpos
+
+[33mcommit 24a0108e74243f4bfdc1719ad9dfe0e988f59e5b[m
+Author: Alejandro Carrillo <37186929@uaz.edu.mx>
+Date:   Tue Jul 20 12:33:20 2021 -0700
+
+    Se definieron los modelos del servicio Corazón de Plata, así como views y el template de la lista principal
+
+[33mcommit cc445f89da1414ffd9d91006e453d282137bb517[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 20 14:02:52 2021 -0500
+
+    Creación de urls y vistas base de la aplicación Traslado de Cuerpos
+
+[33mcommit 545d26b08e67e003773f7b89cabded2bc9934b1e[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 20 12:19:32 2021 -0500
+
+    Creación de los modelos para la aplicación de Traslado de Cuerpos
+
+[33mcommit d10d0e4180c288d7504b0a63a4ea37c74abe5c56[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 20 11:24:56 2021 -0500
+
+    Se creó la app de Traslado de cuerpos
+
+[33mcommit 53affe2cff59d6a89673dda6999173b903b72db4[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Mon Jul 19 12:17:18 2021 -0500
+
+    Modificación del botón editar de la app seguros.
+    
+    Se modifico el botón editar de la app seguros para ser compatible con las vistas de actualizar_tramite y guardar_actualizacion de la app de trámites.
+
+[33mcommit e06b8f708f802f99d7684c60604d7a7adf2c11d4[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Thu Jul 15 16:53:07 2021 -0500
+
+    Redireccionamiento a la app correspondiente.
+    
+    Se crearon dos funciones en views de la app tramite, la primera (actualizar_tramite) extrae el trámite que se desea editar y redirige a un template y la segunda(guardar_acualizacion) que guarda la actualización realizada. Ambas funciones pueden redirigir a la app en la cuál fueron invocadas.
+
+[33mcommit 1b1920d93d92942eb1f518224f77a74d1ab8ef36[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Wed Jul 14 14:58:09 2021 -0500
+
+    Form propio para editar el estado del trámite de pasaporte y seguro
+    
+    Se creó un nuevo form correspondiente a editar trámites de pasaporte y seguro. Además se creó una clase dedicada a esta función y se cambiaron los enlaces en los templates de detail pertenecientes a pasaporte y seguro.
+
+[33mcommit 2e5e4b376bebb546c663d9a0f3b42f4ca477695f[m
+Author: Alejandro Carrillo <37186929@uaz.edu.mx>
+Date:   Tue Jul 13 13:05:50 2021 -0500
+
+    Se creó la app corazon_plata
+
+[33mcommit 326af4acbe050ce077eb504da2de900b85555c9e[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Mon Jul 12 14:59:17 2021 -0500
+
+    Implementación para mostrar la fecha guardada en la base de datos en el formulario de actualizar Visa
+
+[33mcommit 646b887186097bbe34585dde550ea61a98b3d6a7[m
+Merge: 9087132 fb946dc
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Mon Jul 12 13:14:13 2021 -0500
+
+    Merge branch 'master' of https://gitlab.com/juanca_14/sezamidesk
+
+[33mcommit fb946dc3bb509372f71204a6857f2d37540dda46[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Mon Jul 12 12:41:11 2021 -0500
+
+    Se mejoraron aspectos visuales en los formularios de Visa y Apostilla
+
+[33mcommit 9087132cd4a50e5fa25e431196265eb2213f8284[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Fri Jul 9 14:02:13 2021 -0500
+
+    Iconos de los templates y tamaños.
+    
+    Se colocaron los iconos en los correspondientes botones y se ajustaron los tamaños de estos.
+
+[33mcommit 3b5f173566beef38232cb76c93ac880d8799aea9[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Thu Jul 8 14:38:28 2021 -0500
+
+    Se mejoró la validación del llenado de los campos del trámite de Visa
+
+[33mcommit decee729db700d463faeb2f1f179820fd17a19b1[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Thu Jul 8 13:51:31 2021 -0500
+
+    Cambio en la forma de creación de los trámites de Visa
+
+[33mcommit 1003f7021ae06f0f3a5b0a549e0b6438d1b29052[m
+Merge: 4e30a75 8cb28ca
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Thu Jul 8 13:07:26 2021 -0500
+
+    Merge branch 'master' of https://gitlab.com/juanca_14/sezamidesk
+
+[33mcommit 4e30a75fde4bb0b25baa147d343e717c5305a434[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Thu Jul 8 13:07:09 2021 -0500
+
+    Creación de la clase SeguroEliminar.
+    
+    Se creó la clase SeguroEliminar encargada de eliminar un trámite de tipo seguros y la correspondiente modificación de los templates.
+
+[33mcommit 8cb28ca2b8b26da866006576e918b87bbc2e496b[m
+Merge: 7b281a5 c05b25c
+Author: GabrielCuriel1999 <38192397@uaz.edu.mx>
+Date:   Tue Jul 6 18:00:33 2021 -0500
+
+    Merge branch 'master' of https://gitlab.com/juanca_14/sezamidesk
+
+[33mcommit 7b281a5164b1ee5ad07442f67d571fa5aaddb897[m
+Author: GabrielCuriel1999 <38192397@uaz.edu.mx>
+Date:   Tue Jul 6 18:00:23 2021 -0500
+
+    Se modifico el template form de localización de personas para que el capturista solo pueda editar los campos de estatus, ultimo lugar donde fue vista la persona y el campo de observaciones.
+
+[33mcommit c05b25cf786e21d986a6622f22c97483e9d25dff[m
+Author: Alejandro Carrillo <37186929@uaz.edu.mx>
+Date:   Tue Jul 6 14:13:12 2021 -0500
+
+    Se solucionaron los errores que impedían la correcta modificación y guardado de los datos de un beneficiario. Se añadieron los botones de acciones en la lista de trámites de apoyo a migrantes y beneficiarios
+
+[33mcommit 037661718c726500d729779b33adbaf69ae26f25[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Tue Jul 6 13:16:21 2021 -0500
+
+    Detalle seguro
+    
+    Se creó la vista y el template correspondiente a ver el detalle de un trámite referente a seguro social americano.
+
+[33mcommit 557ac987a6b6171cac7077e41aa3cd3e44cdccc8[m
+Author: German-Glez <38192814@uaz.edu.mx>
+Date:   Tue Jul 6 12:56:47 2021 -0500
+
+    Update seguro_form.html
+    
+    Se corrigió un error en el nombre del archivo js tramites.js.
+
+[33mcommit 49a9340a24c9dc41599e6a5e94ac282ed82d560a[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 6 12:47:38 2021 -0500
+
+    Adición y corrección de los datos que se muestran en el detalle de una Visa
+
+[33mcommit e40432cb9e2e23b40d3a6aff60fb9d05369c0b14[m
+Author: Juan Carlos García Murillo <garciamjuancarlos14@gmail.com>
+Date:   Tue Jul 6 12:37:45 2021 -0500
+
+    Se corrigieron errores para ver los detalles y eliminar trámites de Visa
+
+[33mcommit 38c0fbd3d4f743b973c473c0ca9b90eac018e729[m
+Author: German-Glez <38192814@uaz.edu

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Detalles del trámite de apoyo a migrantes
+{% endblock titulo%}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    <div class="container">
+        <div class="row">
+            <div class="col-auto">
+                Servicio de pasaportes y seguro social americanos
+            </div>
+        </div>
+    </div>
+    <br>
+{% endblock encabezado %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card" style="width: 18rem; background-color: #b68ab6;">
+                    <div class="card-body">
+                    <h5 class="card-title"><b>Pasaporte Americano</b></h5>
+                    <p class="card-text">Accede al apartado de trámites relacionados con pasaportes americanos donde se encontraran todas sus funciones.</p>
+                    <a href="{% url 'pasaportes:lista' %}" class="btn btn-primary">Vamos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" style="width: 18rem; background-color: #6fb7cc;">
+                    <div class="card-body">
+                    <h5 class="card-title"><b>Seguro Social Americano</b></h5>
+                    <p class="card-text">Accede al apartado de trámites relacionados con seguro social americano donde se encontraran todas sus funciones.</p>
+                    <a href="{% url 'seguros:lista' %}" class="btn btn-primary">Vamos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

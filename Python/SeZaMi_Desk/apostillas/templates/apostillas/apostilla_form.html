@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Apostillas
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #c9ccdf;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de apostilla
+{% endblock %}
+{% block contenido %}
+<form method="POST" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.acta_americana}}
+                    <label for="id_acta_americana">Acta americana</label> 
+                </p>
+                <p>
+                    {{form.acta_mexicana}}
+                    <label for="id_acta_mexicana">Acta mexicana</label> 
+                </p>
+                <p>
+                    {{form.identificacion_padres}}
+                    <label for="id_identificacion_padres">Identificación oficial de ambos padres</label> 
+                </p>
+                <p>
+                    {{form.curp_doc}}
+                    <label for="id_curp_doc">CURP</label> 
+                </p>
+                <p>
+                    {{form.comprobante_domicilio}}
+                    <label for="id_comprobante_domicilio">Comprobante de domicilio</label> 
+                </p>
+                <p>
+                    {{form.rfc}}
+                    <label for="id_rfc">RFC</label> 
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'apostillas:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

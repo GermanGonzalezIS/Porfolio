@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Visas
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #f6d9b4;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de visa
+{% endblock %}
+{% block contenido %}
+    <form method="POST" id="tramite">
+        {% csrf_token %}
+        {{form.folio}}
+        {{form.empleado}}
+        <section>
+            <div class="container">
+                <p style="display: inline;">
+                    <p>
+                        {{form.nombre_solicitante.errors}}
+                        {{form.nombre_solicitante.label_tag}}
+                        {{form.nombre_solicitante}}
+                    </p>
+                    <p>
+                        {{form.apellido_paterno_solicitante.errors}}
+                        {{form.apellido_paterno_solicitante.label_tag}}
+                        {{form.apellido_paterno_solicitante}}
+                    </p>
+                    <p>
+                        {{form.apellido_materno_solicitante.errors}}
+                        {{form.apellido_materno_solicitante.label_tag}}
+                        {{form.apellido_materno_solicitante}}
+                    </p>
+                    <p>
+                        {{form.pasaporte.errors}}
+                        {{form.pasaporte}}
+                        <label for="id_pasaporte">Pasaporte</label> 
+                    </p>
+                    <p>
+                        {{form.direccion_usa.errors}}
+                        {{form.direccion_usa.label_tag}}
+                        {{form.direccion_usa}}
+                    </p>
+                    <p>
+                        {{form.persona_visitar.errors}}
+                        {{form.persona_visitar.label_tag}}
+                        {{form.persona_visitar}}
+                    </p>
+                    <p>
+                        {{form.tel_persona_visitar.errors}}
+                        {{form.tel_persona_visitar.label_tag}}
+                        {{form.tel_persona_visitar}}
+                    </p>
+                    <p>
+                        {{form.fe_nacimiento_madre.errors}}
+                        {{form.fe_nacimiento_madre.label_tag}}
+                        <br>
+                        {{form.fe_nacimiento_madre}}
+                    </p>
+                    <p>
+                        {{form.fe_nacimiento_padre.errors}}
+                        {{form.fe_nacimiento_padre.label_tag}}
+                        <br>
+                        {{form.fe_nacimiento_padre}}
+                    </p>
+                    <p>
+                        {{form.dir_trabajo_escuela.errors}}
+                        {{form.dir_trabajo_escuela.label_tag}}
+                        {{form.dir_trabajo_escuela}}
+                    </p>
+                    <p>
+                        {{form.nom_dir_trabajo_escuela.errors}}
+                        {{form.nom_dir_trabajo_escuela.label_tag}}
+                        {{form.nom_dir_trabajo_escuela}}
+                    </p>
+                    <p>
+                        {{form.fe_ingreso_trabajo_escuela.errors}}
+                        {{form.fe_ingreso_trabajo_escuela.label_tag}}
+                        <br>
+                        {{form.fe_ingreso_trabajo_escuela}}
+                    </p>
+                    <p>
+                        {{form.ingreso_mensual.errors}}
+                        {{form.ingreso_mensual.label_tag}}
+                        {{form.ingreso_mensual}}
+                    </p>
+                    <p>
+                        {{form.fecha_viaje.errors}}
+                        {{form.fecha_viaje.label_tag}}
+                        <br>
+                        {{form.fecha_viaje}}
+                    </p>
+                    <p>
+                        {{form.red_social_uno.errors}}
+                        {{form.red_social_uno.label_tag}}
+                        {{form.red_social_uno}}
+                    </p>
+                    <p>
+                        {{form.usuario_uno.errors}}
+                        {{form.usuario_uno.label_tag}}
+                        {{form.usuario_uno}}
+                    </p>
+                    <p>
+                        {{form.red_social_dos.errors}}
+                        {{form.red_social_dos.label_tag}}
+                        {{form.red_social_dos}}
+                    </p>
+                    <p>
+                        {{form.usuario_dos.errors}}
+                        {{form.usuario_dos.label_tag}}
+                        {{form.usuario_dos}}
+                    </p>
+                    <p>
+                        {{form.red_social_tres.errors}}
+                        {{form.red_social_tres.label_tag}}
+                        {{form.red_social_tres}}
+                    </p>
+                    <p>
+                        {{form.usuario_tres.errors}}
+                        {{form.usuario_tres.label_tag}}
+                        {{form.usuario_tres}}
+                    </p>
+                    <p>
+                        {{form.correo.errors}}
+                        {{form.correo.label_tag}}
+                        {{form.correo}}
+                    </p>
+                    <p>
+                        {{form.pago.errors}}
+                        {{form.pago}}
+                        <label for="id_pago">Pago</label> 
+                    </p>
+                    <p>
+                        {{form.fecha_cita.errors}}
+                        {{form.fecha_cita.label_tag}}
+                        <br>
+                        {{form.fecha_cita}}
+                    </p>
+                    <input type="hidden" >
+                </p>
+            </div>
+        </section>
+        <div id="prev">
+            <a class="btn btn-secondary btn-lg" href="{% url 'visas:lista' %}" name="botones-formulario">Regresar</a>    
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" value="Guardar" name="botones-formulario">
+        </div>
+    </form>
+{% endblock %}

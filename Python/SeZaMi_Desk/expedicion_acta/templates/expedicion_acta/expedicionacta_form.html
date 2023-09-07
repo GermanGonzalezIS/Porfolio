@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Expedición de acta
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de expedición de acta
+{% endblock %}
+{% block contenido %}
+<form method="POST" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section>
+        <div class="container">
+	    <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    <label for="id_nombre_solicitante">Nombre del solicitante </label> 
+                    {{form.nombre_solicitante}}
+                </p>
+                <p>
+                    <label for="id_fecha_nacimiento">Fecha de nacimiento</label> 
+                    {{form.fecha_nacimiento}}
+                </p>
+                <p>
+                    <label for="id_municipio_registro">Municipio de registro</label> 
+                    {{form.municipio_registro}}
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'expedicion_acta:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

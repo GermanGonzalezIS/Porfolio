@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+Permisos de {{ grupo.grupo }}
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #adadad;"
+{% endblock colorFondo %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">  
+{% endblock css %}
+
+{% block encabezado %}
+Permisos de {{ grupo.grupo }}
+{% endblock encabezado %}
+{% block contenido %}
+<br>
+<h5>Empleado "{{empleado}}"</h5>
+<br>
+<form action="{% url 'empleados:agrega-permisos' empleado.id %}" method="POST">
+    <input name="grupo" type="hidden" value="{{grupo.id}}">
+    <table class="table">
+        <thead>
+            <th>Permiso</th>
+            <th>Estado</th>
+        </thead>
+        <tbody>
+            <div>
+                {% for permiso in permisos %}
+                    <tr>
+                        <td>
+                            {{permiso.name}}
+                        </td>
+                        <td>
+                            <label class="switch" >
+                                
+                                {% if permiso in grupos_empleado %}
+                                    <input type="checkbox" name='{{permiso.id}}' checked>
+                                {% else %}
+                                    <input type="checkbox" name='{{permiso.id}}'>
+                                {% endif %}
+                                    
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                </tr>
+                {% endfor %}
+            </div>
+        </tbody>
+    </table>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    
+    {% if modificar %}
+        <a href="{% url 'empleados:detalle' empleado.id %}" class="btn btn-secondary">Cancelar</a>
+    {% endif %}
+        
+</form>
+<br>
+{% endblock contenido %}

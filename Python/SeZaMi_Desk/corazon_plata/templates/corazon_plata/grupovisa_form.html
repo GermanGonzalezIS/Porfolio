@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{etiqueta}} grupo de Corazón de Plata
+{% endblock titulo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock css %}
+
+{% block colorFondo %}style="background-color: #f8cac8;"{% endblock colorFondo %}
+
+{% block encabezado %}
+    {{etiqueta}} grupo de Corazón de Plata
+{% endblock encabezado %}
+
+{% block contenido %}
+<!-- ***************** DATOS DEL TRAMITE ***************** -->
+<form method="post" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del grupo</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    Número del grupo: <b style="color: rgb(76, 96, 207);">{{grupovisa.id}}</b>
+                </p>
+                <p>
+                    <label for="federacion">Federación:</label>
+                    {{form.federacion}}
+                </p>
+                <p>
+                    <label for="representante">Nombre completo del representante:</label>
+                    {{form.representante}}
+                </p>
+                <p>
+                    <label for="cita_secretaria">Fecha de la cita en la secretaría:</label>
+                    {{form.cita_secretaria}}
+                </p>
+                <p>
+                    <label for="cita_consulado">Fecha de la cita en el consulado:</label>
+                    {{form.cita_consulado}}
+                </p>
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'corazon_plata:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+    </div>
+    <!--Es el botón que va a enviar el formulario-->    
+</form>
+<br>
+{% endblock contenido %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Detalles del beneficiario
+{% endblock titulo%}
+
+{% block colorFondo %}style="background-color: #d9e4bd;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                Detalles del beneficiario 
+            </div>
+            <div class="col-1">
+                <a  class="btn btn-primary" href = "{% url 'beneficiarios:editar' beneficiario.curp %}" style="display: inline;">Editar</a>
+            </div>
+            <div class="col-1">
+                <button onclick="muestraModal('{% url 'beneficiarios:eliminar' beneficiario.curp %}')" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+{% endblock encabezado %}
+
+{% block contenido %}
+<div id="svg_wrap">
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Datos personales</b></p>
+        <hr>
+        <div class="col-6">
+            <p><b>CURP: </b>{{beneficiario.curp}}</p>
+            <p><b>Apellido paterno: </b> {{beneficiario.primer_apellido}}</p>
+            <p><b>Apellido materno: </b> {{beneficiario.segundo_apellido}}</p>
+            <p><b>Nombre: </b>{{beneficiario.nombre}}</p>
+            <p><b>Documento de identificación: </b>{{beneficiario.identificacion}}</p>
+            <p><b>Beneficiario colectivo:</b>
+                {% if beneficiario.beneficiario_colectivo == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+        </div>
+    </section>
+</div>
+    
+
+<div id="svg_wrap">
+    <section> <!-- Para agregar un paso más al formulario se utiliza esta tag y dentro de ella
+        los controles de formulario según se necesite  -->
+        <p><b>Dirección</b></p>
+        <hr>
+        <div class="col-6">
+            <p><b>Municipio: </b>{{beneficiario.direccion.asentamiento.localidad.municipio}}</p>
+            <p><b>Localidad: </b>{{beneficiario.direccion.asentamiento.localidad}}</p>
+            <p><b>Asentamiento: </b>{{beneficiario.direccion.asentamiento}}</p>
+            <p><b>Vialidad: </b>{{beneficiario.direccion.nombre_vialidad}}</p>
+            <p><b>Tipo de vialidad: </b>{{beneficiario.direccion.tipo_vialidad}}</p>
+            <p><b>Entre vialidades: </b>{{beneficiario.direccion.entre_vialidades}}</p>
+            <p><b>Número exterior: </b>{{beneficiario.direccion.numero_exterior}}</p>
+            <p><b>Número interior: </b>
+                {% if beneficiario.direccion.numero_interior == None %}
+                    No aplica  
+                {% else %}
+                    {{beneficiario.direccion.numero_interior}}
+                {% endif %}
+            </p>
+            <p><b>Descripción de la ubicación: </b>{{beneficiario.direccion.descripcion_ubicacion}}</p>
+        </div>
+    </section>
+</div>
+    
+<div id="svg_wrap">
+    <section>
+        <p><b>Estudio socioeconómico</b></p>
+        <hr>
+        <div class="col-6">
+            <p style="display: inline;"><b>Entregó estudio socioeconómico: </b>
+                {% if beneficiario.estudio_socioeconomico.estudio_socioeconomico == True %}
+                    <p style="color: rgb(0, 199, 66);display: inline;">Sí</p>
+                {% else %}
+                    <p style="color: rgb(180, 3, 3);display: inline;">No</p>
+                {% endif %}
+            </p>
+            <p><b>Estado civíl: </b>{{beneficiario.estudio_socioeconomico.estado_civil}}</p>
+            <p><b>Es jefe de familia: </b>    
+                {% if beneficiario.estudio_socioeconomico.jefe_familia == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Ocupación: </b>{{beneficiario.estudio_socioeconomico.ocupacion}}</p>
+            <p><b>Ingreso mensual: </b>{{beneficiario.estudio_socioeconomico.ingreso_mensual}}</p>
+            <p><b>Número de integrantes de la familia: </b>{{beneficiario.estudio_socioeconomico.integrantes_familia}}</p>
+            <p><b>Número de dependientes económicos: </b>{{beneficiario.estudio_socioeconomico.dependientes_economicos}}</p>
+            <!-- ¿Qué va en vivienda? -->
+            <p><b>Vivienda: </b>{{beneficiario.estudio_socioeconomico.vivienda}}</p>
+            <p><b>Número de habitantes de la vivienda: </b>{{beneficiario.estudio_socioeconomico.numero_habitantes_vivienda}}</p>
+            <p><b>Servicio de electricidad: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_electricidad == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Servicio de agua corriente: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_agua == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Servicio de drenaje: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_drenaje == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Servicio de gas: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_gas == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Servicio de teléfono: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_telefono == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Servicio de Internet: </b>
+                {% if beneficiario.estudio_socioeconomico.vivienda_internet == True %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p><b>Nivel de estudios:</b> {{beneficiario.estudio_socioeconomico.nivel_estudios}}</p>
+            <p><b>Tipo de seguridad social:</b> {{beneficiario.estudio_socioeconomico.tipo_seguridad_social}}</p>
+            <p><b>Discapacidad:</b> {{beneficiario.estudio_socioeconomico.discapacidad}}</p>
+            <p><b>Grupo vulnerable:</b> {{beneficiario.estudio_socioeconomico.grupo_vulnerable}}</p>
+        </div>
+    </section>
+    <div id="svg-wrap">
+        <section>
+            <p><b>Historial de trámites</b></p>
+            <hr>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Trámites del beneficiario
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>ID del Trámite</th>
+                                <th>Tipo de trámite</th>
+                                <th>Capturista</th>
+                                <th>Estado del trámite</th>
+                                <th>Fecha de inicio</th>
+                                <th>Fecha de finalización</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID del trámite</th>
+                                <th>Tipo de trámite</th>
+                                <th>Capturista</th>
+                                <th>Estado</th>
+                                <th>Fecha de inicio</th>
+                                <th>Fecha de finalización</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for tramite in tramites_list %}
+                                <tr>
+                                    <td>{{tramite.id}}</td>
+                                    <td>{{tramite.tipo_tramite.nombre_tramite}}</td>
+                                    <td>{{tramite.empleado}}</td>
+                                    <td>{{tramite.estado}}</td>
+                                    <td>{{tramite.fecha_inicio}}</td>
+                                    <td>
+                                        
+                                        {% if tramite.fecha_fin == None %}
+                                            En espera
+                                        {% else %}
+                                            {{tramite.fecha_fin}}
+                                        {% endif %}                                        
+                                        
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="prev">
+        <a class="btn btn-secondary" href="{% url 'beneficiarios:principal' %}">Regresar</a>
+    </div>
+</div>
+    
+    <!-- <div id="prev"><a  class="btn btn-secondary" href = "{% url 'beneficiarios:principal' %}">Regresar</a></div>
+    <div id="next"><a  class="btn btn-primary" href = "{% url 'beneficiarios:principal' %}">Editar</a></div> -->
+
+    <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+    <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+    después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+<br>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminando beneficiario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalCuerpo">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form id="formEliminar" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sí</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/modales.js' %}"></script>
+{% endblock %}
+
+    
+    

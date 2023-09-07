@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Licencia de conducir
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de licencia de conducir
+{% endblock %}
+{% block contenido %}
+<form method="POST" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section>
+        <div class="container">
+	    <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.acta_nacimiento}}
+                    <label for="id_acta_nacimiento">Acta de nacimiento</label> 
+                </p>
+                <p>
+                    {{form.comprobante_dom_eeuu}}
+                    <label for="id_comprobante_dom_eeuu">Comprobante de domicilio en Estados Unidos</label> 
+                </p>
+                <p>
+                    {{form.referencia_dom_zac}}
+                    <label for="id_referencia_dom_zac">Domicilio de referencia en el estado de Zacatecas</label> 
+                </p>
+                <p>
+                    {{form.fotografia}}
+                    <label for="id_fotografia">Fotografía</label> 
+                </p>
+                <p>
+                    <label for="id_tipo_sangre">Tipo de sangre</label> 
+                    {{form.tipo_sangre}}
+                </p>
+                <p>
+                    {{form.identificacion_oficial}}
+                    <label for="identificacion_oficial">Identificación oficial</label> 
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'licencia_conducir:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

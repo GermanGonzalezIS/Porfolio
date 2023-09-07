@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Trámite
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+<div class="container">
+    {% if messages %}
+       {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-10">
+            Iniciando trámite
+        </div>
+    </div>
+</div> 
+{% endblock encabezado %}
+
+{% block contenido %}
+    <form action="{% url app %}" method="POST">
+        {% csrf_token %}
+        <div id="svg_wrap">
+        <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+        </div>
+        <section>
+            <div class="container">
+                <p style="display: inline;">
+                    {{form.as_p}}
+                </p>
+            </div>
+        </section>
+        
+        {% if pasaportes_seguros %}
+        <a href="{% url pasaportes_seguros %}">El beneficiario no cuenta con su CURP</a>
+        {% endif %}
+        <div id="prev">
+            {% if feria_binacional %}
+                <a class="btn btn-secondary btn-lg" href="{% url 'tramites:ferias_binacionales' %}">Regresar a ferias binacionales</a>    
+            {% endif %}
+            <a class="btn btn-secondary btn-lg" href="{% url anterior %}">Regresar {%if feria_binacional %} {{feria_app}} {% endif %}</a>    
+            <input type="submit" class="btn btn-primary btn-lg" id="submit" value="Siguiente">
+        </div>
+        <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+        <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+        después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+    </form>
+    <br>
+{% endblock %}

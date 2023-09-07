@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{ etiqueta }} trámite de seguro social americano
+{% endblock %}
+
+{% block colorFondo %}
+style="background-color: #8ec0d3;"
+{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+    {{ etiqueta }} trámite de seguro social americano
+{% endblock %}
+{% block contenido %}
+<!-- ***************** DATOS DEL TRAMITE *****************  -->
+<form method="post" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.years_work}}
+                    <label for="acta">Años trabajados con seguro social válido</label>
+                </p>
+                <p>
+                    {{form.years}}
+                    <label for="seguro_social">Edad del beneficiario</label>
+
+                </p>
+                <p>
+                    {{form.numero_seguro_social}}
+                    <label for="identificacion_padres">Número de seguro social</label>
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'seguros:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+    </div>
+    <!--Es el botón que va a enviar el formulario-->    
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Corrección de acta
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de corrección de acta
+{% endblock %}
+{% block contenido %}
+<form method="POST" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section>
+        <div class="container">
+	    <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.acta_a_corregir}}
+                    <label for="id_acta_a_corregir">Acta a corregir </label> 
+                </p>
+                <p>
+                    {{form.documentos_comprobantes}}
+                    <label for="id_documentos_comprobantes">Documentos que comprueben lo solicitado </label> 
+                </p>
+                <p>
+                    {{form.testimonial}}
+                    <label for="id_testimonial">Testomonial de 2 personas </label> 
+                </p>
+                <p>
+                    {{form.solicitud_firmado}}
+                    <label for="id_solicitud_firmado">Solicitud firmada </label> 
+                </p>
+                <p>
+                    {{form.original_copias}}
+                    <label for="id_original_copias">Original y 2 copias </label> 
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'correccion_acta:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

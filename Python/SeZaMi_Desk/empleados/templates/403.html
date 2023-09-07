@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    403
+{% endblock %}
+
+{% block colorFondo %}
+style="background-color: #adadad;"
+{% endblock colorFondo %}
+
+{% block encabezado %} 
+Acceso denegado
+{% endblock %}
+
+{% block contenido %}
+<p>No cuenta con permisos para acceder al recurso solicitado, por favor contacte al administrador.</p>
+{% endblock contenido %}

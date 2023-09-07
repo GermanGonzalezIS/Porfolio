@@ -1,0 +1,171 @@
+<form action = {% if id_beneficiario %} "{% url url_beneficiario id_beneficiario %}" {% else %} "{% url url_beneficiario %}" {% endif %}  method="post" id="form_beneficiario">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section id="seccion_beneficiario">
+        <div class="container">
+            <p style="display: inline;"><b>Datos del beneficiario</b></p>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <p style="display: inline;">
+                <p>
+                    {{ form_beneficiario.curp.errors }}
+                    {{ form_beneficiario.curp.label_tag }}
+                    {{ form_beneficiario.curp }}
+                </p>
+                <p>
+                    {{ form_beneficiario.primer_apellido.errors }}
+                    {{ form_beneficiario.primer_apellido.label_tag }}
+                    {{ form_beneficiario.primer_apellido }}
+                </p>
+                <p>
+                    {{ form_beneficiario.segundo_apellido.errors }}
+                    {{ form_beneficiario.segundo_apellido.label_tag }}
+                    {{ form_beneficiario.segundo_apellido }}
+                </p>
+                <p>
+                    {{ form_beneficiario.nombre.errors }}
+                    {{ form_beneficiario.nombre.label_tag }}
+                    {{ form_beneficiario.nombre }}
+                </p>
+                <p>
+                    {{ form_beneficiario.identificacion.errors }}
+                    {{ form_beneficiario.identificacion.label_tag }}
+                    {{ form_beneficiario.identificacion }}
+                </p>
+                <p>
+                    {{ form_beneficiario.beneficiario_colectivo.errors }}
+                    {{ form_beneficiario.beneficiario_colectivo }}
+                    <label for="beneficiario_colectivo">Es beneficiario colectivo</label> 
+                </p>
+            </p>
+        </div>
+    </section>
+    {% if feria_binacional != True%}
+    <section id="seccion_vivienda">
+        <div class="container">
+            <p style="display: inline;"><b>Dirección de la vivienda</b></p>
+            <hr>
+            <p style="display: inline;">
+                {{form_direccion.as_p}}
+            </p>
+        </div>
+    </section>
+    <section id="seccion_estudio">
+        <div class="container">
+            <p style="display: inline;"><b>Estudio socioeconómico</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form_estudio.estudio_socioeconomico.errors}}
+                    {{form_estudio.estudio_socioeconomico}}
+                    <label for="estudio_socioeconomico">Presentó estudio socioeconómico</label> 
+                </p>
+                <p>
+                    {{form_estudio.estado_civil.errors}}
+                    {{form_estudio.estado_civil.label_tag}}
+                    {{form_estudio.estado_civil}}
+                </p>
+                <p>
+                    {{form_estudio.jefe_familia.errors}}
+                    {{form_estudio.jefe_familia}}
+                    <label for="jefe_familia">Es jefe de familia</label> 
+                </p>
+                <p>
+                    {{form_estudio.ocupacion.errors}}
+                    {{form_estudio.ocupacion.label_tag}}
+                    {{form_estudio.ocupacion}}
+                </p>
+                <p>
+                    {{form_estudio.ingreso_mensual.errors}}
+                    {{form_estudio.ingreso_mensual.label_tag}}
+                    {{form_estudio.ingreso_mensual}}
+                </p>
+                <p>
+                    {{form_estudio.integrantes_familia.errors}}
+                    {{form_estudio.integrantes_familia.label_tag}}
+                    {{form_estudio.integrantes_familia}}
+                </p>
+                <p>
+                    {{form_estudio.dependientes_economicos.errors}}
+                    {{form_estudio.dependientes_economicos.label_tag}}
+                    {{form_estudio.dependientes_economicos}}
+                </p>
+                <p>
+                    {{form_estudio.vivienda.errors}}
+                    {{form_estudio.vivienda.label_tag}}
+                    {{form_estudio.vivienda}}
+                </p>
+                <p>
+                    {{form_estudio.numero_habitantes_vivienda.errors}}
+                    {{form_estudio.numero_habitantes_vivienda.label_tag}}
+                    {{form_estudio.numero_habitantes_vivienda}}
+                </p>
+                <p>
+                    {{form_estudio.vivienda_electricidad.errors}}
+                    {{form_estudio.vivienda_electricidad}}
+                    <label for="vivienda_electricidad">Electricidad</label> 
+                </p>
+                <p>
+                    {{form_estudio.vivienda_agua.errors}}
+                    {{form_estudio.vivienda_agua}}
+                    <label for="vivienda_agua">Agua corriente</label> 
+                </p>
+                <p>
+                    {{form_estudio.vivienda_drenaje.errors}}
+                    {{form_estudio.vivienda_drenaje}}
+                    <label for="vivienda_drenaje">Drenaje</label> 
+                </p>
+                <p>
+                    {{form_estudio.vivienda_gas.errors}}
+                    {{form_estudio.vivienda_gas}}
+                    <label for="vivienda_gas">Gas</label> 
+                </p>
+                <p>
+                    {{form_estudio.vivienda_telefono.errors}}
+                    {{form_estudio.vivienda_telefono}}
+                    <label for="vivienda_telefono">Teléfono</label> 
+                </p>
+                <p>
+                    {{form_estudio.vivienda_internet.errors}}
+                    {{form_estudio.vivienda_internet}}
+                    <label for="vivienda_internet">Internet</label> 
+                </p>
+                <p>
+                    {{form_estudio.nivel_estudios.errors}}
+                    {{form_estudio.nivel_estudios.label_tag}}
+                    {{form_estudio.nivel_estudios}}
+                </p>
+                <p>
+                    {{form_estudio.tipo_seguridad_social.errors}}
+                    {{form_estudio.tipo_seguridad_social.label_tag}}
+                    {{form_estudio.tipo_seguridad_social}}
+                </p>
+                <p>
+                    {{form_estudio.discapacidad.errors}}
+                    {{form_estudio.discapacidad.label_tag}}
+                    {{form_estudio.discapacidad}}
+                </p>
+                <p>
+                    {{form_estudio.grupo_vulnerable.errors}}
+                    {{form_estudio.grupo_vulnerable.label_tag}}
+                    {{form_estudio.grupo_vulnerable}}
+                </p>
+            </p>
+        </div>
+    </section>
+    {% endif %}
+    <div id="prev">
+        <input type="hidden" name="app" value="{{app}}">   
+        <input type="hidden" name="tramite_id" value="{{form.tramite.value}}">
+        <input type="hidden" name="template_tramite" value="{{template_tramite}}">
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}">
+    </div>
+</form>

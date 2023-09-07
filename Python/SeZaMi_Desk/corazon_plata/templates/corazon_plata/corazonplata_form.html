@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{etiqueta}} trámite de Corazón de Plata
+{% endblock titulo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock css %}
+
+{% block colorFondo %}style="background-color: #f8cac8;"{% endblock colorFondo %}
+
+{% block encabezado %}
+    {{etiqueta}} trámite de Corazón de Plata
+{% endblock encabezado %}
+
+{% block contenido %}
+<!-- ***************** DATOS DEL TRAMITE ***************** -->
+<form method="post" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    Número del grupo: <b style="color: rgb(76, 96, 207);">{{corazonplata.grupo_visa.id}}</b>
+                </p>
+                <p>
+                    <label for="nombre_ahijado">Nombre(s) del ahijado</label>
+                    {{form.nombre_ahijado}}
+                </p>
+                <p>
+                    <label for="nombre_ahijado">Apellido paterno del ahijado</label>
+                    {{form.ap_paterno_ahijado}}
+                </p>
+                <p>
+                    <label for="nombre_ahijado">Apellido materno del ahijado</label>
+                    {{form.ap_materno_ahijado}}
+                </p>
+                <p>
+                    <label for="nombre_padrino">Nombre completo del padrino</label>
+                    {{form.nombre_padrino}}
+                </p>
+                <p>
+                    {{form.credencial}}
+                    <label for="credencial">Presentó credencial</label>
+                </p>
+                <p>
+                    {{form.pasaporte}}
+                    <label for="pasaporte">Presentó pasaporte</label>
+
+                </p>
+                <p>
+                    {{form.curp}}
+                    <label for="curp">CURP del ahijado</label>
+                </p>
+                <p>
+                    {{form.persona_zacatecana}}
+                    <label for="persona_zacatecana">El ahijado es residente zacatecano</label>
+                </p>
+                <p>
+                    {{form.certificado_medico}}
+                    <label for="certificado_medico">Entregó certificado médico</label>
+                </p>
+                <p>
+                    {{form.padrino}}
+                    <label for="padrino">El familiar migrante pertenece a una organización </label>
+                </p>
+                <p>
+                    {{form.no_antecedentes}}
+                    <label for="no_antecedentes">El ahijado no posee antecedentes migratorios</label>
+                </p>
+                {{form.grupo_visa}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'corazon_plata:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}" name="botones-formulario">
+    </div>
+    <!--Es el botón que va a enviar el formulario-->    
+</form>
+<br>
+<!-- Aquí va el formulario de la visa -->
+
+
+{% endblock contenido %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}
+    
+    
+    

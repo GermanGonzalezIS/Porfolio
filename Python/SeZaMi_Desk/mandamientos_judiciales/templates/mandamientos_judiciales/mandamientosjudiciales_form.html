@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Mandamientos judiciales (Carta de no antecedentes penales)
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #b4ddc9;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %} 
+    Trámite de carta de no antecedentes penales
+{% endblock %}
+{% block contenido %}
+<form method="POST" id="tramite">
+    {% csrf_token %}
+    <div id="svg_wrap">
+    </div>
+    <section>
+        <div class="container">
+            <p style="display: inline;"><b>Datos del trámite</b></p>
+            <hr>
+            <p style="display: inline;">
+                <p>
+                    {{form.curp}}
+                </p>
+                <p>
+                    {{form.acta_nac_original}}
+                    <label for="id_acta_nac_original">Acta de nacimiento original</label> 
+                </p>
+                <p>
+                    {{form.curp_act}}
+                    <label for="id_curp_act">CURP actualizada</label> 
+                </p>
+                <p>
+                    {{form.comprobante_domicilio}}
+                    <label for="id_comprobante_domicilio">Comprobante de domicilio</label> 
+                </p>
+                <p>
+                    {{form.pasaporte_vigente}}
+                    <label for="id_pasaporte_vigente">Pasaporte vigente</label> 
+                </p>
+                <p>
+                    {{form.matricula_consular}}
+                    <label for="id_matricula_consular">Matrícula consular</label> 
+                </p>
+                <p>
+                    {{form.pago_en_caja_fiscalia}}
+                    <label for="id_pago_en_caja_fiscalia">Pago que se realiza en caja de fiscalía</label> 
+                </p>
+                <p>
+                    {{form.fotografia}}
+                    <label for="id_fotografia">Fotografía tamaño infantil a blanco y negro con fondo blanco</label> 
+                </p>
+                <p>
+                    {{form.ine_familiar}}
+                    <label for="id_ine_familiar">INE del familiar directo que tramitó el documento</label> 
+                </p>
+                {{form.tramite}}
+            </p>
+        </div>
+    </section>
+    <div id="prev">
+        <a class="btn btn-secondary btn-lg" href="{% url 'mandamientos_judiciales:lista' %}" name="botones-formulario">Regresar</a>    
+        <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{% if editar == False %}Agregar{% else %}Guardar{% endif %}" name="botones-formulario">
+    </div>
+</form>
+<br>
+{% include 'beneficiarios/beneficiario_global.html' %}
+{% endblock %}
+{% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'js/tramites.js' %}"></script>
+{% endblock %}

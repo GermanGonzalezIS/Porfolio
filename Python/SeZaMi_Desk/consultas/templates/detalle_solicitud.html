@@ -1,0 +1,145 @@
+{% extends 'base_consultas.html' %}
+
+{% load static %}
+
+{% block titulo %}
+SEZAMI Desk
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #a2f7b5;"
+{% endblock colorFondo %}
+
+{% block css %}
+<link href="{% static 'css/consultas.css' %}" rel="stylesheet" />
+{% endblock css %}
+
+{% block contenido %}
+    <br>
+    <div class="jumbotron jumbotron-detalle">
+        <div class="container">
+            <div class="row">
+                {% if solicitud %}
+                    {% if tipoSolicitud == 'Localizacion' %}
+                        <div class="col-6">
+                            <div class="card {% if solicitud.estatus.estatus == 'No localizado' or desaparecido.estatus.id == 1 %}text-white bg-danger mb-3{% else %}text-white bg-success mb-3{% endif %}">
+                                <h5 class="card-header">Datos generales de la persona a localizar</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre(s): </b>{{solicitud.nombre_desaparecido}}</p>
+                                                <p><b>Primer apellido: </b> {{solicitud.apellido_paterno_desaparecido}}</p>
+                                                {% if solicitud.apellido_materno_desaparecido != None %}
+                                                    <p><b>Segundo apellido: </b> {{solicitud.apellido_materno_desaparecido}}</p>
+                                                {% endif %}
+                                                <p><b>Estatus: </b>{{solicitud.estatus}}</p>
+                                                <p><b>Observaciones: </b>{{solicitud.observaciones}}</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <h5 class="card-header">Contacto/Asesor</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre: </b>{{nombre_contacto}}</p>
+                                                <p><b>Teléfono: </b> {{telefono}}</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif tipoSolicitud == 'Traslado' %}
+                        <div class="col-6">
+                            <div class="card">
+                                <h5 class="card-header">Datos generales de la solicitud (traslado de cuerpos)</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre(s) del fallecido: </b>{{solicitud.nombre_fallecido}}</p>
+                                                <p><b>Nombre del familiar: </b> {{solicitud.nombre_familiar_mexicano}}</p>
+                                                <p><b>Lugar del deceso: </b>{{solicitud.lugar_deceso}}</p>
+                                                <p><b>Fecha de deceso: </b>{{solicitud.fecha_deceso}}</p>
+                                                <p><b>Teléfono: </b>{{solicitud.telefono}}</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <h5 class="card-header">Contacto/Asesor</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre: </b>{{nombre_contacto}}</p>
+                                                <p><b>Teléfono: </b> {{telefono}}</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif tipoSolicitud == 'Visa' %}
+                        <div class="col-6">
+                            <div class="card">
+                                <h5 class="card-header">Datos generales de la solicitud (visas)</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre(s) del solicitante: </b>{{solicitud.nombre_solicitante}}</p>
+                                                <p><b>Primer apellido: </b> {{solicitud.apellido_paterno_solicitante}}</p>
+                                                {% if solicitud.apellido_materno_solicitante != None %}
+                                                    <p><b>Segundo apellido: </b> {{solicitud.apellido_materno_solicitante}}</p>
+                                                {% endif %}
+                                                <p><b>Fecha de la cita: </b>
+                                                    {% if solicitud.fecha_cita %}
+                                                        <td>{{solicitud.fecha_cita}}</td>
+                                                    {% else %}
+                                                        <td>Sin asignar</td>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card">
+                                <h5 class="card-header">Contacto/Asesor</h5>
+                                <div class="card-body">
+                                    <div id="svg_wrap">
+                                        <section> 
+                                            <div class="col">
+                                                <p><b>Nombre: </b>{{nombre_contacto}}</p>
+                                                <p><b>Teléfono: </b> {{telefono}}</p>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <h1>Registro no encontrado.</h1>
+                    <br>
+                    <p>No se encontro un registro asociado al folio <b>{{folio}}</b>.</p>
+                {% endif %}
+            </div>
+            <br>
+            <a href="{% url 'consultas:index' %}" class="btn btn-primary">Realizar otra consulta</a>
+        </div>
+    </div>
+{% endblock contenido %}

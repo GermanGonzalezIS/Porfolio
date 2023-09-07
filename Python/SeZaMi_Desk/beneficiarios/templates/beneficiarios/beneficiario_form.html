@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {{ etiqueta }} beneficiario
+{% endblock %}
+
+{% block colorFondo %}style="background-color: #d9e4bd;"{% endblock colorFondo %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block encabezado %}
+    {{ etiqueta }} beneficiario
+{% endblock %}
+{% block contenido %}
+    <form method="post">
+        {% csrf_token %}
+        <div id="svg_wrap">
+        <!--El javascript inserta aquí la sección correspondiente conforme nos movemos en el formulario  -->
+        </div>
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Datos del beneficiario</b></p>
+                <hr>
+                <p style="display: inline;">
+                    {{form.as_p}}
+                </p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Datos de la vivienda</b></p>
+                <hr>
+                <p style="display: inline;">
+                    {{form_direccion.as_p}}
+                </p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <p style="display: inline;"><b>Estudio socioeconómico</b></p>
+                <hr>
+                <p style="display: inline;">
+                    {{form_estudio.as_p}}
+                </p>
+            </div>
+        </section>
+        <div id="prev">
+                <a class="btn btn-secondary btn-lg" href="{% url 'beneficiarios:principal' %}">Regresar</a>    
+                <input type="submit" class="btn btn-primary btn-lg" id="submit" value="{{boton}}">
+        </div>
+        <!--Es el botón que va a enviar el formulario (en teoría xd)-->
+        <!--No olviden poner las validaciones del de este lado, se tendrán que poner a mano a menos de que
+        después encuentre alguna forma de ponerlas con ayuda de Django y utilizando este mismo código-->
+    </form>
+    <br>
+{% endblock %}

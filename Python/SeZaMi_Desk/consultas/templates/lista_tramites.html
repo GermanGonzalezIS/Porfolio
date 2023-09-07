@@ -1,0 +1,77 @@
+{% extends 'base_consultas.html' %}
+
+{% load static %}
+
+{% block titulo %}
+SEZAMI Desk
+{% endblock titulo %}
+
+{% block colorFondo %}
+style="background-color: #a2f7b5;"
+{% endblock colorFondo %}
+
+{% block css %}
+<link href="{% static 'css/consultas.css' %}" rel="stylesheet" />
+{% endblock css %}
+
+{% block contenido %}
+    <br>
+    <div class="jumbotron jumbotron-detalle">
+        <div class="container">
+            <div class="row">
+                {% if beneficiario %}
+                    <div class="col-6">
+                        <div class="card">
+                            <h5 class="card-header">Datos del Beneficiario</h5>
+                            <div class="card-body">
+                                <div id="svg_wrap">
+                                    <section> 
+                                        <div class="col">
+                                            <p><b>Nombre(s): </b>{{beneficiario.nombre}}</p>
+                                            <p><b>Primer apellido: </b> {{beneficiario.primer_apellido}}</p>
+                                            <p><b>Segundo apellido: </b> {{beneficiario.segundo_apellido}}</p>
+                                            <p><b>CURP: </b>{{beneficiario.curp}}</p>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <h1>Trámite no encontrado.</h1>
+                    <br>
+                    <p>No se encontró un trámite asociado a la curp <b>{{curp}}</b>.</p>
+                {% endif %}
+            </div>
+            <br>
+            {% if beneficiario %}
+            <div class="card mb-4">
+                <h5 class="card-header">Lista de trámites</h5>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <th>CURP</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </thead>
+                        <tbody>
+                            {% for tramite in tramites  %}
+                                <tr>
+                                    <td>{{tramite.beneficiario.curp}}</td>
+                                    <td>{{tramite.tipo_tramite.nombre_tramite}}</td>
+                                    <td>{{tramite.estado}}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'consultas:detalle' tramite.id %}">Ver detalle</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+                
+            <br>
+            <a href="{% url 'consultas:index' %}" class="btn btn-primary">Consultar otra CURP</a>
+        </div>
+    </div>
+{% endblock contenido %}
